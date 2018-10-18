@@ -1058,6 +1058,10 @@ var _resource = __webpack_require__(90);
 
 var _resource2 = _interopRequireDefault(_resource);
 
+var _deviceQueries = __webpack_require__(132);
+
+var _deviceQueries2 = _interopRequireDefault(_deviceQueries);
+
 var _helpers = __webpack_require__(42);
 
 var _router = __webpack_require__(116);
@@ -1067,8 +1071,6 @@ var _router2 = _interopRequireDefault(_router);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-console.log(_vue2.default); /*  */
 
 _vue2.default.directive("lazyload", _LazyLoad2.default);
 
@@ -1086,6 +1088,16 @@ _vue2.default.use(_resource2.default, {
     resources: resources,
     endpoint: '/static/api'
 });
+
+_vue2.default.use(_deviceQueries2.default, {
+    phone: 'max-width: 567px',
+    tablet: 'min-width: 568px',
+    mobile: 'max-width: 1024px',
+    laptop: 'min-width: 1025px',
+    desktop: 'min-width: 1280px',
+    monitor: 'min-width: 1448px'
+});
+
 var vm = new _vue2.default({
     router: _router2.default,
     render: function render(h) {
@@ -5379,6 +5391,325 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-49fa8fae", module.exports)
   }
 }
+
+/***/ }),
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */,
+/* 130 */,
+/* 131 */,
+/* 132 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _keys = __webpack_require__(43);
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _matchMedia = __webpack_require__(133);
+
+var _matchMedia2 = _interopRequireDefault(_matchMedia);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  install: function install(Vue, queries) {
+    var DeviceVM = new Vue({
+      data: function data() {
+        return {
+          devices: {}
+        };
+      },
+
+
+      methods: {
+        addDevice: function addDevice(name, active) {
+          var _this = this;
+
+          this.$set(this.devices, name, active);
+
+          return function (_ref) {
+            var matches = _ref.matches;
+
+            _this.devices[name] = matches;
+          };
+        }
+      }
+    });
+
+    (0, _keys2.default)(queries).forEach(function (name) {
+      var query = (0, _matchMedia2.default)('(' + queries[name] + ')');
+      var update = DeviceVM.addDevice(name, query.matches);
+      query.addListener(update);
+    });
+
+    Vue.prototype.$device = DeviceVM.devices;
+  }
+};
+
+/***/ }),
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _extends2 = __webpack_require__(41);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _slicedToArray2 = __webpack_require__(134);
+
+var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var matchMediaFallback = function matchMediaFallback() {
+  var listeners = [];
+  var idle = true;
+
+  var device = function () {
+    var node = document.createElement('div');
+    var style = document.createElement('style');
+
+    node.id = 'match-media-node';
+    style.innerHTML = '#match-media-node {\n      width: 100%;\n      height: 100%;\n      position: absolute;\n      bottom: 100%;\n      overflow: scroll;\n    }';
+
+    document.head.appendChild(style);
+    document.body.insertBefore(node, document.body.children[0]);
+
+    return {
+      get width() {
+        return node.clientWidth;
+      },
+      get height() {
+        return node.clientHeight;
+      },
+      get orientation() {
+        return node.clientHeight > node.clientWidth ? 'portrait' : 'landscape';
+      },
+      get fontSize() {
+        return window.getComputedStyle(document.documentElement).getPropertyValue('font-size');
+      }
+    };
+  }();
+
+  var createHandler = function createHandler(feature, value) {
+    if (feature === 'orientation') {
+      return function () {
+        return value === device.orientation;
+      };
+    }
+
+    var _feature$split$revers = feature.split('-').reverse(),
+        _feature$split$revers2 = (0, _slicedToArray3.default)(_feature$split$revers, 2),
+        prop = _feature$split$revers2[0],
+        limit = _feature$split$revers2[1];
+
+    var operand = !limit ? '==' : limit === 'min' ? '<' : '>';
+
+    var parseValue = function () {
+      return ~value.indexOf('em') ? function () {
+        return parseFloat(value) * device.fontSize;
+      } : function () {
+        return parseFloat(value);
+      };
+    }();
+
+    var handlers = {
+      'width': function width() {
+        return eval(parseValue() + operand + device.width);
+      },
+      'height': function height() {
+        return eval(parseValue() + operand + device.height);
+      }
+    };
+
+    return handlers[prop];
+  };
+
+  var parseQuery = function parseQuery(queryString) {
+    var _queryString$replace$ = queryString.replace(/[()\s]/g, '').split(':'),
+        _queryString$replace$2 = (0, _slicedToArray3.default)(_queryString$replace$, 2),
+        feature = _queryString$replace$2[0],
+        value = _queryString$replace$2[1];
+
+    return createHandler(feature, value);
+  };
+
+  window.addEventListener('resize', function () {
+    if (!idle) return;
+    idle = false;
+
+    var width = device.width;
+    var height = device.height;
+
+    var timer = setInterval(function () {
+      if (width !== device.width || height !== device.height) {
+        width = device.width;
+        height = device.height;
+      } else {
+        clearTimeout(timer);
+        listeners.forEach(function (handler) {
+          return handler();
+        });
+        idle = true;
+      }
+    }, 100);
+  });
+
+  return function (queryString) {
+    var query = parseQuery(queryString);
+    var matcher = {
+      get matches() {
+        return query();
+      }
+    };
+
+    return (0, _extends3.default)({}, matcher, {
+      addListener: function addListener(cb) {
+        var handler = function handler() {
+          return cb(matcher);
+        };
+        listeners.push(handler);
+      }
+    });
+  };
+};
+
+var matchMedia = window.matchMedia || matchMediaFallback();
+
+exports.default = matchMedia;
+
+/***/ }),
+/* 134 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _isIterable2 = __webpack_require__(135);
+
+var _isIterable3 = _interopRequireDefault(_isIterable2);
+
+var _getIterator2 = __webpack_require__(138);
+
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+  function sliceIterator(arr, i) {
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = (0, _getIterator3.default)(arr), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"]) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  return function (arr, i) {
+    if (Array.isArray(arr)) {
+      return arr;
+    } else if ((0, _isIterable3.default)(Object(arr))) {
+      return sliceIterator(arr, i);
+    } else {
+      throw new TypeError("Invalid attempt to destructure non-iterable instance");
+    }
+  };
+}();
+
+/***/ }),
+/* 135 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(136), __esModule: true };
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(96);
+__webpack_require__(29);
+module.exports = __webpack_require__(137);
+
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var classof = __webpack_require__(39);
+var ITERATOR = __webpack_require__(2)('iterator');
+var Iterators = __webpack_require__(11);
+module.exports = __webpack_require__(1).isIterable = function (it) {
+  var O = Object(it);
+  return O[ITERATOR] !== undefined
+    || '@@iterator' in O
+    // eslint-disable-next-line no-prototype-builtins
+    || Iterators.hasOwnProperty(classof(O));
+};
+
+
+/***/ }),
+/* 138 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(139), __esModule: true };
+
+/***/ }),
+/* 139 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(96);
+__webpack_require__(29);
+module.exports = __webpack_require__(140);
+
+
+/***/ }),
+/* 140 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject = __webpack_require__(4);
+var get = __webpack_require__(38);
+module.exports = __webpack_require__(1).getIterator = function (it) {
+  var iterFn = get(it);
+  if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
+  return anObject(iterFn.call(it));
+};
+
 
 /***/ })
 /******/ ]);

@@ -8,11 +8,11 @@
 .ff--500 { .font-stack('Prompt', 500) }
 .ff--700 { .font-stack('Prompt', 700) }
 
-
 // extend placeholders
 .txt--body {
     &:extend(.ff--300);
     font-size: 1rem;
+    
 }
   
 .txt--rte {
@@ -26,29 +26,23 @@
     line-height: 1;
     font-size: 2.4rem;
     letter-spacing: -.005em;
-    // @media (@tablet) {
-        // font-size: 2.6rem;
-    // }
+    
 }
 .txt--preview {
     &:extend(.ff--500);
     font-size: 3rem;
     text-transform: capitalize;
-    // @media (@laptop) {
-        // font-size: 2.7rem;
-    // }
-    // @media (@desktop) {
-        // font-size: 3.2rem;
-    // }
+    .laptop({font-size: 2.7rem;});
+    .desktop({font-size: 3.2rem;})
+    
 }
 .txt--title {
     &:extend(.ff--200);
     font-size: 3rem;
     line-height: 1.2;
     text-transform: capitalize;
-    // @media (@laptop) {
-        // font-size: 3.2rem;
-    // }
+    .laptop({font-size: 3.2rem;});
+    
 }
 .txt--subtitle {
     &:extend(.ff--500);
