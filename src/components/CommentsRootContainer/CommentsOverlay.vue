@@ -113,7 +113,7 @@ export default {
 
 
 
-<style lang="less" scoped>
+<style lang="less" scoped rel="stylesheet/less">
 button {
   cursor: pointer;
 }

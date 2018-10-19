@@ -45,7 +45,7 @@ const rules = [{
                 loaders: {
                     css: ExtractTextPlugin.extract({fallback: 'vue-style-loader', use: ['css-loader', 'postcss-loader']}),
                     // you can also include <style lang="less"> or other langauges
-                    less: ExtractTextPlugin.extract({fallback: 'vue-style-loader', use: ['css-loader', 'postcss-loader', 'less-loader']})
+                    // less: ExtractTextPlugin.extract({fallback: 'vue-style-loader', use: ['css-loader', 'postcss-loader', 'less-loader']})
                 }
             }
         }

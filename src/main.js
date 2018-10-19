@@ -29,7 +29,7 @@ Vue.use(commentsOverlay, {
 })
 Vue.use(resource, {
     resources,
-    endpoint: '/static/api'
+    endpoint: 'http://blog.smiledpeace.com/static/api'
 });
 
 Vue.use(deviceQueries, {
