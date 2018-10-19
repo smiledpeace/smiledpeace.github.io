@@ -22,6 +22,7 @@ export default {
 
     Object.keys(queries).forEach(name => {
       let query = matchMedia(`(${queries[name]})`)
+      
       let update = DeviceVM.addDevice(name, query.matches)
       query.addListener(update)
     })

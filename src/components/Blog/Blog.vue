@@ -1,22 +1,22 @@
 <template>
   <main class="blog" :class="{ 'blog--reading': this.post }">
     <blog-nav :content="content" :filters="filters" :navs="navs"/>
-    <!-- <blog-feed :filters="filters"/>
+    <blog-feed :filters="filters"/>
     <blog-post :post="post"/>
-    <blog-footer/> -->
+    <blog-footer/>
   </main>
 </template>
 
 <script>
-import BlogNav from './BlogNav'
-// import BlogFeed from './BlogFeed'
-// import BlogPost from './BlogPost'
-// import BlogFooter from './BlogFooter'
+import BlogNav from "./BlogNav";
+import BlogFeed from "./BlogFeed";
+import BlogPost from './BlogPost'
+import BlogFooter from './BlogFooter'
 
 export default {
-  name: 'blog',
-  components: { BlogNav,  }, // BlogFeed, BlogPost, BlogFooter
-  resource: 'Blog',
+  name: "blog",
+  components: { BlogNav, BlogFeed, BlogPost, BlogFooter}, // BlogFeed, BlogPost, BlogFooter
+  resource: "Blog",
   props: {
     post: String,
     author: String
@@ -25,39 +25,38 @@ export default {
   data() {
     return {
       navs: 0,
-      title: '',
+      title: "",
       labels: {
-        post: '',
-        author: ''
+        post: "",
+        author: ""
       }
-    }
+    };
   },
 
   computed: {
     content() {
-      return { title: this.title, labels: this.labels }
+      return { title: this.title, labels: this.labels };
     },
     filters() {
-      let filters = {}
+      let filters = {};
 
-      if (this.post) filters.post = this.post
-      if (this.author) filters.author = this.author
+      if (this.post) filters.post = this.post;
+      if (this.author) filters.author = this.author;
 
-      return filters
+      return filters;
     }
   },
 
   watch: {
-    '$route.name' (to, from) {
-      if (to !== from) this.navs++
+    "$route.name"(to, from) {
+      if (to !== from) this.navs++;
     }
   },
 
   mounted() {
-    this.$getResource('blog')
-      .then(x => {
-        // use pace hook to know when rendering is ready
-      })
+    this.$getResource("blog").then(x => {
+      // use pace hook to know when rendering is ready
+    });
   }
-}
+};
 </script>

@@ -46,6 +46,9 @@ Vue.use(deviceQueries, {
 const vm = new Vue({
     router,
     render: h => h(App),
+    mounted() {
+        window.rootVue = this;
+    },
 }).$mount('#app')
 
 

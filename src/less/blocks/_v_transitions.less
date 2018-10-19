@@ -1,7 +1,8 @@
+.easings('default');
 .v {
     &--fade {
       &-enter-active,
-      &-leave-active { transition: all 275ms cb() }
+      &-leave-active { transition: all 275ms @types }
   
       &-enter,
       &-leave-to { opacity: 0 }
@@ -12,7 +13,7 @@
   
     &--mask {
       &-enter-active,
-      &-leave-active { transition: all 150ms cb() 500ms }
+      &-leave-active { transition: all 150ms @types 500ms }
   
       &-enter,
       &-leave-to { opacity: 0 }
