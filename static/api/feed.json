@@ -89,17 +89,5 @@
     "published": "2016-10-27T09:42:32Z",
     "author": "Tommi Filipson",
     "id": "dolor-quis"
-  }, {
-    "title": "webpack 那些事（一）",
-    "image": "https://s3-us-west-2.amazonaws.com/s.cdpn.io/450744/maarten-van-den-heuvel.jpg",
-    "published": "2018-10-19T09:42:32Z",
-    "author": "Young",
-    "id": "webpack-some"
-  }, {
-    "title": "Dreamix 11",
-    "image": "https://s3-us-west-2.amazonaws.com/s.cdpn.io/450744/maarten-van-den-heuvel.jpg",
-    "published": "2018-07-13T14:13:12Z",
-    "author": "Young",
-    "id": "dreamix-11"
   }]
 }
