@@ -1,4 +1,5 @@
 /* reset */
+
 * {
     box-sizing: inherit;
     margin: 0;
@@ -15,94 +16,154 @@
     -webkit-padding-start: 0;
     -webkit-padding-end: 0;
     -webkit-padding-after: 0;
-  }
-  
-  *::before,
-  *::after {
+}
+
+*::before,
+*::after {
     box-sizing: inherit;
-  }
-  
-  *:active,
-  *:hover {
+}
+
+*:active,
+*:hover {
     outline: 0;
-  }
-  
-  html {
+}
+
+html {
     box-sizing: border-box;
     font-size: 100%;
     height: 100%;
-  }
-  
-  body {
+}
+
+body {
     position: relative;
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-  
-  b, i, em, strong,
-  h1, h2, h3, h4, h5, h6,
-  th, td, pre, ins, del, address,
-  input, select, button, textarea {
+}
+
+b,
+i,
+em,
+strong,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+td,
+pre,
+ins,
+del,
+address,
+input,
+select,
+button,
+textarea {
     text-transform: inherit;
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
     font-style: normal;
     letter-spacing: inherit;
-  }
-  
-  textarea,
-  input {
+}
+
+textarea,
+input {
     appearance: none;
     background-clip: padding-box;
-  }
-  
-  a, ins, del, button {
+}
+
+a,
+ins,
+del,
+button {
     color: inherit;
     text-decoration: none;
-  }
-  
-  ul, ol,
-  menu {
+}
+
+ul,
+ol,
+menu {
     list-style: none;
-  }
-  
-  table {
+}
+
+table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-  }
-  
-  pre,
-  textarea {
+}
+
+pre,
+textarea {
     overflow: auto;
     max-width: 100%;
-  }
-  
-  img {
+}
+
+img {
     display: block;
-  }
-  
-  svg:not(:root) {
+}
+
+svg:not(:root) {
     overflow: hidden;
-  }
-  
-  form {
+}
+
+form {
     width: 100%;
-  }
-  
-  button {
+}
+
+button {
     cursor: pointer;
     overflow: visible;
-  }
-  
-  textarea {
+}
+
+textarea {
     resize: none;
-  }
-  
-  ::moz-focus-inner {
+}
+
+::moz-focus-inner {
     padding: 0;
     border: none;
-  }
-  
+}
+
+pre,
+code,
+tt {
+    font-size: 12px;
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code,
+tt {
+    margin: 0 0px;
+    padding: 0px 0px;
+    white-space: nowrap;
+    border: 1px solid #eaeaea;
+    background-color: var(--bg-color);
+    border-radius: 3px;
+}
+
+pre>code {
+    margin: 0;
+    padding: 0;
+    white-space: pre-line;
+    border: none;
+    background: transparent;
+}
+
+pre {
+    background-color: var(--bg-color);
+    border: 1px solid #ccc;
+    font-size: 13px;
+    line-height: 19px;
+    overflow: auto;
+    padding: 6px 10px;
+    border-radius: 3px;
+}
+
+pre code,
+pre tt {
+    background-color: transparent;
+    border: none;
+}
