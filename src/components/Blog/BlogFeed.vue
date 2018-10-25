@@ -6,7 +6,7 @@
           <figcaption v-if="!reading || $device.phone" class="preview__details">
             <router-link class="preview__title"
               :to="`/read/${post.id}`"
-              @click.native="scrollTo(0, 220, scrollDelay)">
+              @click.native="fun">
               {{ post.title }}
             </router-link>
 
@@ -17,7 +17,7 @@
 
               <router-link class="preview__author"
                 :to="`/by/${kebabify(post.author)}`"
-                @click.native="scrollTo(0, 220, scrollDelay)">
+                @click.native="fun">
                 {{ post.author }}
               </router-link>
             </div>
@@ -45,7 +45,7 @@ export default {
     data() {
         return {
             posts: [],
-            transition: "preview-appear"
+            transition: "preview-appear",
         };
     },
 
@@ -79,6 +79,13 @@ export default {
         scrollTo,
         kebabify,
         prettyDate,
+        fun() {
+            setTimeout(() => {
+                scrollTo(document.documentElement.scrollTop, 0, value => {
+                    document.documentElement.scrollTop = value;
+                })
+            }, this.scrollDelay);
+        },
         getBgImg(src) {
             return { backgroundImage: `url(${src})` };
         },

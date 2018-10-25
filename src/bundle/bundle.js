@@ -6255,6 +6255,13 @@ exports.default = {
         scrollTo: _helpers.scrollTo,
         kebabify: _helpers.kebabify,
         prettyDate: _helpers.prettyDate,
+        fun: function fun() {
+            setTimeout(function () {
+                (0, _helpers.scrollTo)(document.documentElement.scrollTop, 0, function (value) {
+                    document.documentElement.scrollTop = value;
+                });
+            }, this.scrollDelay);
+        },
         getBgImg: function getBgImg(src) {
             return { backgroundImage: "url(" + src + ")" };
         },
@@ -6350,7 +6357,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       nativeOn: {
         "click": function($event) {
-          _vm.scrollTo(0, 220, _vm.scrollDelay)
+          return _vm.fun($event)
         }
       }
     }, [_vm._v("\n            " + _vm._s(post.title) + "\n          ")]), _vm._v(" "), _c('div', {
@@ -6364,7 +6371,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       nativeOn: {
         "click": function($event) {
-          _vm.scrollTo(0, 220, _vm.scrollDelay)
+          return _vm.fun($event)
         }
       }
     }, [_vm._v("\n              " + _vm._s(post.author) + "\n            ")])], 1)], 1) : _vm._e()])], 1)])
