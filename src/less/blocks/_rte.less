@@ -1,8 +1,15 @@
 .rte {
     &:extend(.txt--rte);
   
-    p + p {
+    
+    pre, pre + p, blockquote, blockquote + p,  p + p  {
       margin-top: 1em;
+    }
+    
+    blockquote {
+      border-left: 4px solid @border;
+      padding: .2em 1em;
+      background-color: @code
     }
   
     a:hover,
