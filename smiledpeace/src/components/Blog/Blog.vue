@@ -12,7 +12,7 @@ import BlogNav from './BlogNav'
 import BlogFeed from './BlogFeed'
 import BlogPost from './BlogPost'
 import BlogFooter from './BlogFooter'
-import { watch, computed, ref, reactive, onBeforeMount } from 'vue'
+import { watch, computed, ref, reactive } from 'vue'
 export default {
   name: 'blog',
   components: { BlogNav, BlogFeed, BlogPost, BlogFooter }, // BlogFeed, BlogPost, BlogFooter

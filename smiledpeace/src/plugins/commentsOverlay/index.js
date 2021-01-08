@@ -51,7 +51,7 @@ export default {
       })
     })
     // render dom
-    const bind = root.mount(document.body.appendChild(document.createElement('div')))
+    root.mount(document.body.appendChild(document.createElement('div')))
     // 全局注册实例
     app.directive('comments-enabled', {
       mounted (el, binding) {
