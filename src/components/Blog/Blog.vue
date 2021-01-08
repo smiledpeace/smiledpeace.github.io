@@ -12,10 +12,19 @@ import BlogNav from './BlogNav'
 import BlogFeed from './BlogFeed'
 import BlogPost from './BlogPost'
 import BlogFooter from './BlogFooter'
-import { computed, ref, reactive } from 'vue'
 
 export default {
   name: 'blog',
+  data () {
+    return {
+      navs: 0,
+      title: '',
+      labels: {
+        post: '',
+        author: ''
+      }
+    }
+  },
   components: {
     BlogNav,
     BlogFeed,
@@ -27,40 +36,24 @@ export default {
     post: String,
     author: String
   },
-  setup (props, context) {
-    const navs = ref(0)
-    const state = reactive({
-      title: '',
-      labels: {
-        post: '',
-        author: ''
-      }
-    })
-    const content = computed(() => {
+  mounted () {
+    this.$getResource('blog')
+  },
+  computed: {
+    content () {
       return {
-        title: state.title,
-        labels: state.labels
+        title: this.title,
+        labels: this.labels
       }
-    })
-    const filters = computed(() => {
+    },
+    filters () {
       const filters = {}
 
-      if (props.post) filters.post = props.post
-      if (props.author) filters.author = props.author
+      if (this.post) filters.post = this.post
+      if (this.author) filters.author = this.author
 
       return filters
-    })
-    return {
-      navs,
-      content,
-      filters,
-      ...state
     }
-  },
-  mounted () {
-    this.$getResource('blog').then(x => {
-      console.log(x)
-    })
   },
   watch: {
     '$route' (to, from) {
