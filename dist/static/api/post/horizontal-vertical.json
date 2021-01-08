@@ -1,0 +1,13 @@
+{
+  "results": [{
+    "id": "horizontal-vertical",
+    "title": "记一次Web横屏转竖屏",
+    "content": "<div>\n<p>2021年1月8日10:51:43</p>\n<h2>记一次web横屏转竖屏</h2>\n<blockquote>\n<p>css 修改</p>\n</blockquote>\n<pre><code>    // 横屏切换竖屏直接调换宽高笔\n    html.vertical {\n        height: 100vw;\n        width: 100vh;\n        overflow: hidden;\n    }\n</code></pre>\n<blockquote>\n<p>js 修改</p>\n</blockquote>\n<pre><code>    const html = document.documentElement\n    const { clientWidht, clientHeight } = html\n    // 旋转之后有留白 留白为宽高差的一半\n    const dis = (clientWidth - clientHeight) / 2 \n    html.style.transform = `\n        translateX(${dis}px) // 高度100vw将试图推往左\n        translateY(-${dis}px) // 宽度100vh将试图推往下 \n        rotate(270deg) // 旋转角度\n    `\n    html.classList.add('vertical')\n</code></pre>\n<blockquote>\n<p>思维无限</p>\n</blockquote>\n<blockquote>\n<p>冬季少见测阳光刺进纱窗，暖洋洋。</p>\n</blockquote>\n\n\n\n\n</div>",
+    "image": "./static/image/wind/wind.jpg",
+    "meta": {
+      "description": "我已经尽力了」距离你的能力极限还有21.1公里。",
+      "published": "2021-01-8T10:51:43Z",
+      "author": "Young"
+    }
+  }]
+}
