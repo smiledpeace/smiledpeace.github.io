@@ -1,24 +1,25 @@
 <template>
-    <div class="comments-overlay">
-        <div class="comments-overlay__container" v-for="comment in target.comments" :key="comment.id" :style="getCommentPostition(comment)">
-            <button class="comments-overlay__indicator" v-if="editting != comment" @click="onIndicatorClick(comment)">
-                {{ comment.commenter.initials }}
-            </button>
-            <div v-else class="comments-overlay__form">
-                <p>{{ getCommentMetaString(comment) }}</p>
-                <textarea ref="text" v-model="text" />
-                <button @click="edit" :disabled="!text">Save</button>
-                <button @click="cancel">Cancel</button>
-                <button @click="remove">Remove</button>
-            </div>
-        </div>
-
-        <div class="comments-overlay__form" v-if="this.creating" :style="getCommentPostition(this.creating)">
-            <textarea ref="text" v-model="text" />
-            <button @click="create" :disabled="!text">Save</button>
-            <button @click="cancel">Cancel</button>
-        </div>
+  <div class="comments-overlay">
+    <div class="comments-overlay__container" v-for="comment in target.comments" :key="comment.id"
+         :style="getCommentPostition(comment)">
+      <button class="comments-overlay__indicator" v-if="editting != comment" @click="onIndicatorClick(comment)">
+        {{ comment.commenter.initials }}
+      </button>
+      <div v-else class="comments-overlay__form">
+        <p>{{ getCommentMetaString(comment) }}</p>
+        <textarea ref="text" v-model="text"/>
+        <button @click="edit" :disabled="!text">Save</button>
+        <button @click="cancel">Cancel</button>
+        <button @click="remove">Remove</button>
+      </div>
     </div>
+
+    <div class="comments-overlay__form" v-if="this.creating" :style="getCommentPostition(this.creating)">
+      <textarea ref="text" v-model="text"/>
+      <button @click="create" :disabled="!text">Save</button>
+      <button @click="cancel">Cancel</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -55,15 +56,18 @@ export default {
       const rect = this.target.getRect()
       const x = comment.ratioX * rect.width + rect.left
       const y = comment.ratioY * rect.height + rect.top
-      return { left: `${x}px`, top: `${y}px` }
+      return {
+        left: `${x}px`,
+        top: `${y}px`
+      }
     },
     getCommentMetaString (comment) {
       if (typeof comment.timestamp === 'string') {
         comment.timestamp = new Date(comment.timestamp)
       }
       return `${
-                comment.commenter.fullName
-            } - ${comment.timestamp.getMonth()}/${comment.timestamp.getDate()}/${comment.timestamp.getFullYear()}`
+        comment.commenter.fullName
+      } - ${comment.timestamp.getMonth()}/${comment.timestamp.getDate()}/${comment.timestamp.getFullYear()}`
     },
     edit () {
       this.editting.text = this.text
@@ -96,15 +100,15 @@ export default {
 
   mounted () {
     this.$root.$on(
-            `commentTargetClicked__${this.target.id}`,
-            this.onTargetClick
+      `commentTargetClicked__${this.target.id}`,
+      this.onTargetClick
     )
   },
 
   beforeUnmount () {
     this.$root.$off(
-            `commentTargetClicked__${this.target.id}`,
-            this.onTargetClick
+      `commentTargetClicked__${this.target.id}`,
+      this.onTargetClick
     )
   }
 }
@@ -131,7 +135,7 @@ button {
   &__indicator {
     z-index: 1;
     display: block;
-    background-color:#f6e770;
+    background-color: #f6e770;
     font-weight: bold;
     border-radius: 0 1rem 1rem 1rem;
     border: none;
@@ -141,7 +145,7 @@ button {
 
   &__form {
     z-index: 1;
-    background-color:#f6e770;
+    background-color: #f6e770;
     padding: 1rem;
     border-radius: 0 1rem 1rem 1rem;
     border: none;

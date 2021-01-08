@@ -36,7 +36,7 @@ app.use(commentsOverlay, {
 // 请求接口
 app.use(resource, {
   resources,
-  endpoint: 'http://blog.smiledpeace.com/static/api'
+  endpoint: '/static/api' || 'http://blog.smiledpeace.com/static/api'
 })
 // media screen
 app.use(

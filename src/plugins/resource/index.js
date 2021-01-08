@@ -12,6 +12,7 @@ export default {
       const { path, resolve } = resources[name][method](options)
       const uri = endpoint + path
 
+      console.log(uri)
       // methods return promise to allow chaining
       const mappers = {
         // only return promise without modifying instance $data

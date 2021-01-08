@@ -1,9 +1,9 @@
 <template>
   <div>
     <comments-overlay
-        v-for="target in targets"
-        :target="target"
-        :key="target.id">
+      v-for="target in targets"
+      :target="target"
+      :key="target.id">
     </comments-overlay>
   </div>
 

@@ -1,13 +1,16 @@
 <template>
-  <div>
-    <router-view/>
-    <div class="test"></div>
-  </div>
+  <router-view/>
+  <div class="test"></div>
 </template>
 
 <script>
 
 export default {
-  name: 'App'
+  name: 'App',
+  setup () {
+    return {
+      name: '111'
+    }
+  }
 }
 </script>

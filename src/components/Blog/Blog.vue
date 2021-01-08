@@ -13,9 +13,15 @@ import BlogFeed from './BlogFeed'
 import BlogPost from './BlogPost'
 import BlogFooter from './BlogFooter'
 import { computed, ref, reactive } from 'vue'
+
 export default {
   name: 'blog',
-  components: { BlogNav, BlogFeed, BlogPost, BlogFooter }, // BlogFeed, BlogPost, BlogFooter
+  components: {
+    BlogNav,
+    BlogFeed,
+    BlogPost,
+    BlogFooter
+  }, // BlogFeed, BlogPost, BlogFooter
   resource: 'Blog',
   props: {
     post: String,
@@ -31,7 +37,10 @@ export default {
       }
     })
     const content = computed(() => {
-      return { title: state.title, labels: state.labels }
+      return {
+        title: state.title,
+        labels: state.labels
+      }
     })
     const filters = computed(() => {
       const filters = {}
@@ -47,6 +56,11 @@ export default {
       filters,
       ...state
     }
+  },
+  mounted () {
+    this.$getResource('blog').then(x => {
+      console.log(x)
+    })
   },
   watch: {
     '$route' (to, from) {

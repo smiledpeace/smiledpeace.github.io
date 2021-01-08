@@ -1,12 +1,12 @@
 <template>
-  <transition-group tag="ul" :name="transition"  class="blog__feed">
+  <transition-group tag="ul" :name="transition" class="blog__feed">
     <li v-for="post in feed" class="preview" :key="post.id">
       <figure class="preview__figure" :class="figureClass" :style="getBgImg(post.image)">
         <transition name="v--fade">
           <figcaption v-if="!reading || $device.phone" class="preview__details">
             <router-link class="preview__title"
-              :to="`/read/${post.id}`"
-              @click="fun">
+                         :to="`/read/${post.id}`"
+                         @click="fun">
               {{ post.title }}
             </router-link>
 
@@ -16,8 +16,8 @@
               </time>
 
               <router-link class="preview__author"
-                :to="`/by/${kebabify(post.author)}`"
-                @click="fun">
+                           :to="`/by/${kebabify(post.author)}`"
+                           @click="fun">
                 {{ post.author }}
               </router-link>
             </div>
@@ -38,7 +38,8 @@ export default {
   props: {
     filters: {
       type: Object,
-      default: () => {}
+      default: () => {
+      }
     }
   },
 

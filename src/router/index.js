@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-const Blog = () => import('@/components/Blog/Blog')
+const Blog = () => import(/* webpackChunkName: "Blog" */ '@/components/Blog/Blog')
 const routes = [{
   path: '/',
   name: 'feed',
