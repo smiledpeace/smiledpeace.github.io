@@ -24,74 +24,74 @@
 </template>
 
 <script>
-import { kebabify, prettyDate } from "../../js/helpers";
+import { kebabify, prettyDate } from '../../js/helpers'
 
 export default {
-  name: "blog-post",
-  resource: "BlogPost",
+  name: 'blog-post',
+  resource: 'BlogPost',
   components: {},
   props: { post: String },
 
-  data() {
+  data () {
     return {
-      title: "",
-      author: "",
-      content: "",
-      published: "",
-      description: "",
+      title: '',
+      author: '',
+      content: '',
+      published: '',
+      description: '',
       commentsReady: false,
       ready: false
-    };
+    }
   },
 
   computed: {
-    allReady() {
-      return this.ready && this.post;
+    allReady () {
+      return this.ready && this.post
     }
   },
 
   watch: {
-    post(to, from) {
-      if (to === from || !this.post) return;
+    post (to, from) {
+      if (to === from || !this.post) return
 
-      this.commentsReady = false;
-      this.$getResource("post", to)
+      this.commentsReady = false
+      this.$getResource('post', to)
         .then(this.showComments)
         .then(() => {
-          this.ready = true;
-        });
+          this.ready = true
+        })
     }
   },
 
   methods: {
     kebabify,
     prettyDate,
-    showComments() {
+    showComments () {
       // This is injected by prerender-spa-plugin on build time, we don't prerender disqus comments.
       if (
         window.__PRERENDER_INJECTED &&
         window.__PRERENDER_INJECTED.prerendered
       ) {
-        return;
+        return
       }
 
       setTimeout(() => {
-        this.commentsReady = true;
-      }, 1000);
+        this.commentsReady = true
+      }, 1000)
     }
   },
 
-  mounted() {
+  mounted () {
     if (!this.post) {
-      this.ready = true;
-      return;
+      this.ready = true
+      return
     }
 
-    this.$getResource("post", this.post)
+    this.$getResource('post', this.post)
       .then(this.showComments)
       .then(() => {
-        this.ready = true;
-      });
+        this.ready = true
+      })
   }
-};
+}
 </script>

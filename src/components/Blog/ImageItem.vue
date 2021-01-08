@@ -1,7 +1,7 @@
 <template>
   <figure class="image__wrapper">
       <image-spinner class="image__spinner" ></image-spinner>
-      
+
     <img
       class="image__item"
       :data-url="source"
@@ -11,19 +11,19 @@
 </template>
 
 <script>
-    import ImageSpinner from "../common/ImageSpinner.vue";
-    export default {
-        name: "ImageItem",
-        props: {
-            source: {
-            type: String,
-            required: true
-            }
-        },
-        components: {
-            ImageSpinner
-        }
+import ImageSpinner from '../common/ImageSpinner.vue'
+export default {
+  name: 'ImageItem',
+  props: {
+    source: {
+      type: String,
+      required: true
     }
+  },
+  components: {
+    ImageSpinner
+  }
+}
 </script>
 
 <style lang="less" scoped>

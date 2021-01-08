@@ -1,10 +1,10 @@
 const matchMediaFallback = () => {
-  let listeners = []
+  const listeners = []
   let idle = true
 
   const device = (() => {
-    let node = document.createElement('div')
-    let style = document.createElement('style')
+    const node = document.createElement('div')
+    const style = document.createElement('style')
 
     node.id = 'match-media-node'
     style.innerHTML = `#match-media-node {
@@ -19,18 +19,18 @@ const matchMediaFallback = () => {
     document.body.insertBefore(node, document.body.children[0])
 
     return {
-      get width() {
+      get width () {
         return node.clientWidth
       },
-      get height() {
+      get height () {
         return node.clientHeight
       },
-      get orientation() {
+      get orientation () {
         return (node.clientHeight > node.clientWidth)
           ? 'portrait'
           : 'landscape'
       },
-      get fontSize() {
+      get fontSize () {
         return window
           .getComputedStyle(document.documentElement)
           .getPropertyValue('font-size')
@@ -43,13 +43,15 @@ const matchMediaFallback = () => {
       return () => value === device.orientation
     }
 
-    let [prop, limit] = feature
+    const [prop, limit] = feature
       .split('-')
       .reverse()
 
-    const operand = (!limit) ? '=='
-      : (limit === 'min') ? '<'
-      : '>'
+    const operand = (!limit)
+      ? '=='
+      : (limit === 'min')
+          ? '<'
+          : '>'
 
     const parseValue = (() => {
       return (~value.indexOf('em'))
@@ -58,26 +60,26 @@ const matchMediaFallback = () => {
     })()
 
     const handlers = {
-      'width': () => eval(parseValue() + operand + device.width),
-      'height': () => eval(parseValue() + operand + device.height)
+      width: () => parseValue() + operand + device.width,
+      height: () => parseValue() + operand + device.height
     }
 
     return handlers[prop]
   }
 
   const parseQuery = (queryString) => {
-    let [feature, value] = queryString.replace(/[()\s]/g, '').split(':')
+    const [feature, value] = queryString.replace(/[()\s]/g, '').split(':')
     return createHandler(feature, value)
   }
 
   window.addEventListener('resize', () => {
-    if (!idle) return;
+    if (!idle) return
     idle = false
 
     let width = device.width
     let height = device.height
 
-    let timer = setInterval(() => {
+    const timer = setInterval(() => {
       if (width !== device.width || height !== device.height) {
         width = device.width
         height = device.height
@@ -92,14 +94,14 @@ const matchMediaFallback = () => {
   return (queryString) => {
     const query = parseQuery(queryString)
     const matcher = {
-      get matches() {
+      get matches () {
         return query()
       }
     }
 
     return {
       ...matcher,
-      addListener(cb) {
+      addListener (cb) {
         const handler = () => cb(matcher)
         listeners.push(handler)
       }

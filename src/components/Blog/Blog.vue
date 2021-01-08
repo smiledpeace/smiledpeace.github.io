@@ -8,55 +8,50 @@
 </template>
 
 <script>
-import BlogNav from "./BlogNav";
-import BlogFeed from "./BlogFeed";
+import BlogNav from './BlogNav'
+import BlogFeed from './BlogFeed'
 import BlogPost from './BlogPost'
 import BlogFooter from './BlogFooter'
-
+import { computed, ref, reactive } from 'vue'
 export default {
-  name: "blog",
-  components: { BlogNav, BlogFeed, BlogPost, BlogFooter}, // BlogFeed, BlogPost, BlogFooter
-  resource: "Blog",
+  name: 'blog',
+  components: { BlogNav, BlogFeed, BlogPost, BlogFooter }, // BlogFeed, BlogPost, BlogFooter
+  resource: 'Blog',
   props: {
     post: String,
     author: String
   },
-
-  data() {
-    return {
-      navs: 0,
-      title: "",
+  setup (props, context) {
+    const navs = ref(0)
+    const state = reactive({
+      title: '',
       labels: {
-        post: "",
-        author: ""
+        post: '',
+        author: ''
       }
-    };
-  },
+    })
+    const content = computed(() => {
+      return { title: state.title, labels: state.labels }
+    })
+    const filters = computed(() => {
+      const filters = {}
 
-  computed: {
-    content() {
-      return { title: this.title, labels: this.labels };
-    },
-    filters() {
-      let filters = {};
+      if (props.post) filters.post = props.post
+      if (props.author) filters.author = props.author
 
-      if (this.post) filters.post = this.post;
-      if (this.author) filters.author = this.author;
-
-      return filters;
+      return filters
+    })
+    return {
+      navs,
+      content,
+      filters,
+      ...state
     }
   },
-
   watch: {
-    "$route.name"(to, from) {
-      if (to !== from) this.navs++;
+    '$route' (to, from) {
+      if (to.name !== from.name) this.navs++
     }
-  },
-
-  mounted() {
-    this.$getResource("blog").then(x => {
-      // use pace hook to know when rendering is ready
-    });
   }
-};
+}
 </script>

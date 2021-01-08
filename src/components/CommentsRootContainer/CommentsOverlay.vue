@@ -6,7 +6,7 @@
             </button>
             <div v-else class="comments-overlay__form">
                 <p>{{ getCommentMetaString(comment) }}</p>
-                <textarea ref="text" v-model="text" />        
+                <textarea ref="text" v-model="text" />
                 <button @click="edit" :disabled="!text">Save</button>
                 <button @click="cancel">Cancel</button>
                 <button @click="remove">Remove</button>
@@ -23,95 +23,92 @@
 
 <script>
 export default {
-    props: ["target"],
+  props: ['target'],
 
-    data() {
-        return {
-            text: null,
-            editting: null,
-            creating: null
-        };
-    },
-
-    methods: {
-        onTargetClick(payload) {
-            this._resetState();
-            const rect = this.target.getRect();
-
-            this.creating = {
-                id: payload.id,
-                targetId: this.target.id,
-                commenter: payload.commenter,
-                ratioX: (payload.clientX - rect.left) / rect.width,
-                ratioY: (payload.clientY - rect.top) / rect.height
-            };
-        },
-        onIndicatorClick(comment) {
-            this._resetState();
-            this.text = comment.text;
-            this.editting = comment;
-        },
-        getCommentPostition(comment) {
-            const rect = this.target.getRect();
-            const x = comment.ratioX * rect.width + rect.left;
-            const y = comment.ratioY * rect.height + rect.top;
-            return { left: `${x}px`, top: `${y}px` };
-        },
-        getCommentMetaString(comment) {
-            if (typeof comment.timestamp === 'string') {
-                comment.timestamp = new Date(comment.timestamp)
-            }
-            return `${
-                comment.commenter.fullName
-            } - ${comment.timestamp.getMonth()}/${comment.timestamp.getDate()}/${comment.timestamp.getFullYear()}`;
-        },
-        edit() {
-            
-            this.editting.text = this.text;
-            this.editting.timestamp = new Date();
-            this._emit("edit", this.editting);
-            this._resetState();
-        },
-        create() {
-            this.creating.text = this.text;
-            this.creating.timestamp = new Date();
-            this._emit("create", this.creating);
-            this._resetState();
-        },
-        cancel() {
-            this._resetState();
-        },
-        remove() {
-            this._emit("remove", this.editting);
-            this._resetState();
-        },
-        _emit(evt, data) {
-            this.$root.$emit(evt, data);
-        },
-        _resetState() {
-            this.text = null;
-            this.editting = null;
-            this.creating = null;
-        }
-    },
-
-    mounted() {
-        this.$root.$on(
-            `commentTargetClicked__${this.target.id}`,
-            this.onTargetClick
-        );
-    },
-
-    beforeDestroy() {
-        this.$root.$off(
-            `commentTargetClicked__${this.target.id}`,
-            this.onTargetClick
-        );
+  data () {
+    return {
+      text: null,
+      editting: null,
+      creating: null
     }
-};
+  },
+
+  methods: {
+    onTargetClick (payload) {
+      this._resetState()
+      const rect = this.target.getRect()
+
+      this.creating = {
+        id: payload.id,
+        targetId: this.target.id,
+        commenter: payload.commenter,
+        ratioX: (payload.clientX - rect.left) / rect.width,
+        ratioY: (payload.clientY - rect.top) / rect.height
+      }
+    },
+    onIndicatorClick (comment) {
+      this._resetState()
+      this.text = comment.text
+      this.editting = comment
+    },
+    getCommentPostition (comment) {
+      const rect = this.target.getRect()
+      const x = comment.ratioX * rect.width + rect.left
+      const y = comment.ratioY * rect.height + rect.top
+      return { left: `${x}px`, top: `${y}px` }
+    },
+    getCommentMetaString (comment) {
+      if (typeof comment.timestamp === 'string') {
+        comment.timestamp = new Date(comment.timestamp)
+      }
+      return `${
+                comment.commenter.fullName
+            } - ${comment.timestamp.getMonth()}/${comment.timestamp.getDate()}/${comment.timestamp.getFullYear()}`
+    },
+    edit () {
+      this.editting.text = this.text
+      this.editting.timestamp = new Date()
+      this._emit('edit', this.editting)
+      this._resetState()
+    },
+    create () {
+      this.creating.text = this.text
+      this.creating.timestamp = new Date()
+      this._emit('create', this.creating)
+      this._resetState()
+    },
+    cancel () {
+      this._resetState()
+    },
+    remove () {
+      this._emit('remove', this.editting)
+      this._resetState()
+    },
+    _emit (evt, data) {
+      this.$root.$emit(evt, data)
+    },
+    _resetState () {
+      this.text = null
+      this.editting = null
+      this.creating = null
+    }
+  },
+
+  mounted () {
+    this.$root.$on(
+            `commentTargetClicked__${this.target.id}`,
+            this.onTargetClick
+    )
+  },
+
+  beforeUnmount () {
+    this.$root.$off(
+            `commentTargetClicked__${this.target.id}`,
+            this.onTargetClick
+    )
+  }
+}
 </script>
-
-
 
 <style lang="less" scoped rel="stylesheet/less">
 button {

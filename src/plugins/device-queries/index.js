@@ -1,32 +1,35 @@
+import { createApp, reactive } from 'vue'
 import matchMedia from './match-media'
 
 export default {
-  install(Vue, queries) {
-    const DeviceVM = new Vue({
-      data() {
-        return {
+  install (app, queries) {
+    const root = createApp({
+      setup (props, context) {
+        const state = reactive({
           devices: {}
-        }
-      },
-
-      methods: {
-        addDevice(name, active) {
-          this.$set(this.devices, name, active)
+        })
+        const addDevice = (name, active) => {
+          state.devices[name] = active
 
           return ({ matches }) => {
-            this.devices[name] = matches
+            state.devices[name] = matches
           }
+        }
+
+        return {
+          ...state,
+          addDevice
         }
       }
     })
-
+    const DeviceVM = root.mount(document.createElement('div'))
     Object.keys(queries).forEach(name => {
-      let query = matchMedia(`(${queries[name]})`)
-      
-      let update = DeviceVM.addDevice(name, query.matches)
+      const query = matchMedia(`(${queries[name]})`)
+
+      const update = DeviceVM.addDevice(name, query.matches)
       query.addListener(update)
     })
 
-    Vue.prototype.$device = DeviceVM.devices
+    app.config.globalProperties.$device = DeviceVM.devices
   }
 }

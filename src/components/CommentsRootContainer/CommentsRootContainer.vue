@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import CommentsOverlay from "./CommentsOverlay.vue";
+import CommentsOverlay from './CommentsOverlay.vue'
 
 export default {
   components: { CommentsOverlay },
   computed: {
-    targets() {
-      return this.$root.targets;
+    targets () {
+      return this.$root.targets
     }
   }
-};
-</script> 
+}
+</script>

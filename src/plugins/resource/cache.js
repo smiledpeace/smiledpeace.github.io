@@ -1,12 +1,12 @@
 export default (() => {
-    let store = {}
+  const store = {}
 
-    return {
-        has: uri => !!store[uri],
-        get: uri => JSON.parse(store[uri]),
-        set: (uri, data) => {
-            store[uri] = JSON.stringify(data)
-            return Promise.resolve(data)
-        }
+  return {
+    has: uri => !!store[uri],
+    get: uri => JSON.parse(store[uri]),
+    set: (uri, data) => {
+      store[uri] = JSON.stringify(data)
+      return Promise.resolve(data)
     }
+  }
 })()
