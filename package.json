@@ -4,6 +4,9 @@
   "description": "A Vue.js project",
   "author": "young <young@goldmorning.cn>",
   "private": true,
+  "scripts": {
+    "dev": "webpack --config ./webpack.config.js"
+  },
   "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^9.2.1",
