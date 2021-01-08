@@ -1,0 +1,109 @@
+.preview {
+    position: relative;
+    margin: 1.25rem 1.25rem 5rem;
+    z-index: 0;
+    .imagePlaceholder();
+    .tablet( {
+        width: ~"calc(50% - 2.5rem)";
+        margin: 1.25rem 1.25rem 2.5rem;
+    }
+    );
+    .laptop( {
+        width: ~'calc(100% / 3 - 2.5rem)';
+    }
+    );
+    .desktop( {
+        width: ~"calc(100% / 3 - 5rem)";
+        margin: 2.5rem;
+    }
+    );
+    .easeings('default');
+    &-move {
+        transition: all 550ms @types
+    }
+    .easeings('out');
+    &-enter-active {
+        transition: all 325ms @types 175ms
+    }
+    .easeings('out');
+    &-appear-enter-active {
+        transition: all 275ms @types 200ms
+    }
+    .easeings('in');
+    &-leave-active {
+        transition: all 225ms @types;
+        position: absolute;
+        z-index: -1;
+    }
+    &-enter,
+    &-leave-to,
+    &-appear-enter {
+        opacity: 0;
+        transform: translate3d(0, -2.5rem, 0);
+    }
+    &__figure {
+        position: relative;
+        padding-top: 140%;
+        .easeings('out');
+        transition: padding-top 275ms @types;
+        .bgCover();
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 33%;
+            background-image: linear-gradient(to bottom, rgba(@selection, .33), transparent);
+        }
+        &--mobile {
+            padding-top: 90%;
+        }
+    }
+    &__details {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    &__title {
+        &:extend(.txt--preview);
+        display: block;
+        height: 100%;
+        padding: .75rem;
+        color: rgba(@bg, .8);
+        background-color: rgba(@selection, 0);
+        .easeings('default');
+        transition: background-color 225ms @types;
+        .preview__figure--mobile &,
+        &:hover {
+            background-color: rgba(@selection, .65);
+        }
+        .monitor( {
+            padding-right: 1.5rem;
+        }
+        )
+    }
+    &__meta {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding: .5rem 0;
+        font-size: .9rem;
+        .tablet( {
+            white-space: nowrap;
+        }
+        )
+    }
+    &__published::after {
+        content: 'by';
+        padding: 0 .25rem;
+    }
+    &__author {
+        &:extend(.ff--500);
+        text-decoration: underline;
+        white-space: nowrap;
+        font-size: .9rem;
+    }
+}
