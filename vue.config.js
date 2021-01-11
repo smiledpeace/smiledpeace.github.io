@@ -4,7 +4,8 @@ function resolve (dir) {
   return path.join(__dirname, dir)
 }
 module.exports = {
-  publicPath: './',
+  publicPath: './dist',
+  indexPath: 'G:/project/smiledpeace.github.io/index.html',
   configureWebpack: config => {
     // 别名配置
     config.resolve.alias = {
