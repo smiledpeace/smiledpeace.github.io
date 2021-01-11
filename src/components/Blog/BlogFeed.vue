@@ -58,7 +58,6 @@ export default {
       return this.$device.phone ? 0 : 560
     },
     figureClass () {
-      console.log(this)
       return { 'preview__figure--mobile': this.$device.phone && this.reading }
     },
     feed () {

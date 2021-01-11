@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { kebabify, prettyDate } from '../../js/helpers'
+import { kebabify, prettyDate } from '@/js/helpers'
 
 export default {
   name: 'blog-post',
