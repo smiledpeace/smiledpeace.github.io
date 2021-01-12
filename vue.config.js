@@ -5,7 +5,7 @@ function resolve (dir) {
 }
 module.exports = {
   publicPath: './',
-  outputDir: 'doc',
+  outputDir: 'docs',
   configureWebpack: config => {
     // 别名配置
     config.resolve.alias = {
