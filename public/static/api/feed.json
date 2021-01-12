@@ -16,7 +16,7 @@
     },
     {
       "title": "记一次Web横屏转竖屏",
-      "image": "./static/image/wind/wind.jpg",
+      "image": "./dist/static/image/wind/wind.jpg",
       "published": "2021-01-08T10:51:43Z",
       "author": "Young",
       "id": "horizontal-vertical"

@@ -1,4 +1,5 @@
 import { createApp, h } from 'vue'
+import { isProd } from '@/js/config'
 import App from './App.vue'
 
 import './less/index.less'
@@ -36,7 +37,7 @@ app.use(commentsOverlay, {
 // 请求接口
 app.use(resource, {
   resources,
-  endpoint: './static/api'
+  endpoint: isProd ? './dist/static/api' : './static/api'
 })
 // media screen
 app.use(
