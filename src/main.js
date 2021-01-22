@@ -28,8 +28,8 @@ app.use(commentsOverlay, {
   commenterSelector () {
     return {
       id: uuid(),
-      fullName: 'Mick Keeper',
-      initials: 'MK',
+      fullName: `Magic ${Math.random().toString(16).slice(2)}`,
+      initials: 'SMILE',
       email: 'young@goldmorning.cn'
     }
   }

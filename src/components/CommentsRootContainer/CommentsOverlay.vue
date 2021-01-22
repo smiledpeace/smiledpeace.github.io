@@ -69,7 +69,7 @@ export default {
       }
       return `${
         comment.commenter.fullName
-      } - ${comment.timestamp.getMonth()}/${comment.timestamp.getDate()}/${comment.timestamp.getFullYear()}`
+      } - ${comment.timestamp.getMonth() + 1}/${comment.timestamp.getDate()}/${comment.timestamp.getFullYear()}`
     },
     edit () {
       this.editting.text = this.text
@@ -147,7 +147,7 @@ button {
     border-radius: 0 1rem 1rem 1rem;
     border: none;
     height: 2rem;
-    width: 2rem;
+    padding: 0 .5rem;
   }
 
   &__form {
