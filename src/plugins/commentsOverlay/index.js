@@ -1,6 +1,6 @@
-import { createApp, h } from 'vue'
+import { createApp, h, reactive } from 'vue'
 import { uuid } from '@/js/helpers'
-
+import bus from '@/js/bus'
 import CommentsRootContainer from '@components/CommentsRootContainer/CommentsRootContainer.vue'
 const defaultOptions = {
   commenterSelector () {
@@ -10,44 +10,38 @@ const defaultOptions = {
       initials: '--',
       email: null
     }
-  },
-  data: {
-    targets: {},
-    onCreate (created) {
-      this.targets[created.targetId].comments.push(created)
-    },
-    onEdit (editted) {
-      // This is obviously not necessary
-      // It's there to illustrate what could be done in the callback of a remote call
-      const comments = this.targets[editted.targetId].comments
-      comments.splice(comments.indexOf(editted), 1, editted)
-    },
-    onRemove (removed) {
-      console.log(removed)
-
-      const comments = this.targets[removed.targetId].comments
-      console.log(comments.indexOf(removed))
-
-      comments.splice(comments.indexOf(removed), 1)
-    }
   }
 }
 
 export default {
   install: (app, opts) => {
+    const state = reactive({
+      targets: {}
+    })
     const options = { ...defaultOptions, ...opts }
 
     const root = createApp({
-      data: function () {
+      name: 'CommentsRoot',
+      setup () {
         return {
-          targets: options.data.targets
+          ...state
         }
       },
       // 在根实例上注册Vue事件处理程序
       render: () => h(CommentsRootContainer, {
-        onCreate: options.data.onCreate,
-        onEdit: options.data.onEdit,
-        onRemove: options.data.onRemove
+        onCreate: created => state.targets[created.targetId].comments.push(created),
+        onEdit: editted => {
+          const comments = state.targets[editted.targetId].comments
+          comments.splice(comments.indexOf(editted), 1, editted)
+        },
+        onRemove: (removed) => {
+          console.log(removed)
+
+          const comments = state.targets[removed.targetId].comments
+          console.log(comments.indexOf(removed))
+
+          comments.splice(comments.indexOf(removed), 1)
+        }
       })
     })
     // render dom
@@ -55,18 +49,14 @@ export default {
     // 全局注册实例
     app.directive('comments-enabled', {
       mounted (el, binding) {
-        root.$set(
-          root.targets,
-          binding.value,
-          {
-            id: binding.value,
-            comments: [],
-            getRect: () => el.getBoundingClientRect()
-          }
-        )
+        state.targets[binding.value] = {
+          id: binding.value,
+          comments: [],
+          getRect: () => el.getBoundingClientRect()
+        }
 
         el.addEventListener('click', (evt) => {
-          root.$emit(`commentTargetClicked__${binding.value}`, {
+          bus.$emit(`commentTargetClicked__${binding.value}`, {
             id: uuid(),
             commenter: options.commenterSelector(),
             clientX: evt.clientX,

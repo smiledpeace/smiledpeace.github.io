@@ -1,6 +1,6 @@
 <template>
   <transition name="post">
-    <article v-if="allReady" class="post">
+    <article v-if="allReady" class="post" v-comments-enabled="title">
       <header class="post__header">
         <h2 class="post__title">{{ title }}</h2>
 

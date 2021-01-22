@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="comments-overlay__form" v-if="this.creating" :style="getCommentPostition(this.creating)">
+    <div class="comments-overlay__form" v-if="creating" :style="getCommentPostition(creating)">
       <textarea ref="text" v-model="text"/>
       <button @click="create" :disabled="!text">Save</button>
       <button @click="cancel">Cancel</button>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import bus from '@/js/bus'
 export default {
   props: ['target'],
 
@@ -36,6 +37,7 @@ export default {
 
   methods: {
     onTargetClick (payload) {
+      console.log(payload)
       this._resetState()
       const rect = this.target.getRect()
 
@@ -89,7 +91,7 @@ export default {
       this._resetState()
     },
     _emit (evt, data) {
-      this.$root.$emit(evt, data)
+      this.$emit(evt, data)
     },
     _resetState () {
       this.text = null
@@ -98,15 +100,20 @@ export default {
     }
   },
 
-  mounted () {
-    this.$root.$on(
-      `commentTargetClicked__${this.target.id}`,
-      this.onTargetClick
-    )
+  beforeMount () {
+    console.log(this.target.id)
+    this.$nextTick(() => {
+      bus.$on(
+       `commentTargetClicked__${this.target.id}`,
+       (params) => {
+         this.onTargetClick(params)
+       }
+      )
+    })
   },
 
   beforeUnmount () {
-    this.$root.$off(
+    bus.$off(
       `commentTargetClicked__${this.target.id}`,
       this.onTargetClick
     )
