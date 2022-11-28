@@ -17,15 +17,16 @@ import router from './router'
 
 const app = createApp({
   render: () => h(App),
-  mounted () {
+  mounted() {
     window.rootVue = this
   }
 })
 // 路由
 app.use(router)
+
 // 描述
 app.use(commentsOverlay, {
-  commenterSelector () {
+  commenterSelector() {
     return {
       id: uuid(),
       fullName: `Magic ${Math.random().toString(16).slice(2)}`,
@@ -40,16 +41,14 @@ app.use(resource, {
   endpoint: isProd ? './dist/static/api' : './static/api'
 })
 // media screen
-app.use(
-  deviceQueries, {
-    phone: 'max-width: 567px',
-    tablet: 'min-width: 568px',
-    mobile: 'max-width: 1024px',
-    laptop: 'min-width: 1025px',
-    desktop: 'min-width: 1280px',
-    monitor: 'min-width: 1448px'
-  }
-)
+app.use(deviceQueries, {
+  phone: 'max-width: 567px',
+  tablet: 'min-width: 568px',
+  mobile: 'max-width: 1024px',
+  laptop: 'min-width: 1025px',
+  desktop: 'min-width: 1280px',
+  monitor: 'min-width: 1448px'
+})
 // 指令
 app.directive('lazyload', lazyLoad)
 // 挂载

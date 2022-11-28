@@ -20,6 +20,13 @@
       "published": "2021-01-08T10:51:43Z",
       "author": "Young",
       "id": "horizontal-vertical"
+    },
+    {
+      "title": "Web Serial API",
+      "image": "./dist/static/image/wind/wind.jpg",
+      "published": "2022/11/28 17:50:12",
+      "author": "Young",
+      "id": "web-serial-api"
     }
   ]
 }
