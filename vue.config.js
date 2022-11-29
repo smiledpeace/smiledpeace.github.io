@@ -1,15 +1,15 @@
 const isProd = process.env.NODE_ENV === 'production'
 const path = require('path')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, dir)
 }
 const publicPath = isProd ? './dist' : ''
-const indexPath = isProd ? 'G:/project/smiledpeace.github.io/index.html' : 'index.html'
+const indexPath = isProd ? 'D:/Project/smiledpeace.github.io/index.html' : 'index.html'
 module.exports = {
   publicPath,
   indexPath,
-  configureWebpack: config => {
+  configureWebpack: (config) => {
     // 别名配置
     config.resolve.alias = {
       '@': resolve('src'),
