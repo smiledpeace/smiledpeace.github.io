@@ -1,8 +1,7 @@
 {
-  "name": "template",
+  "name": "smiledpeace.github.io",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,6 +12,11 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
+    "autoprefixer": "^10.4.14",
+    "less": "^4.1.2",
+    "postcss": "^8.4.21",
+    "prettier": "^2.8.7",
+    "tailwindcss": "^3.3.1",
     "vite": "^4.2.0"
   }
 }
