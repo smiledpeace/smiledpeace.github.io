@@ -1,0 +1,1 @@
+import{_ as s,C as t,a as n}from"./Footer-050be403.js";import{o,c as r,a,u as e,F as _}from"./index-757c75b0.js";const c={name:"HomeIndex"},l=Object.assign(c,{props:{id:String},setup(m){return(p,f)=>(o(),r(_,null,[a(e(s)),a(e(t)),a(e(n))],64))}});export{l as default};

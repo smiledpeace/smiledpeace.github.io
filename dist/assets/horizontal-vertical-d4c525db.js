@@ -1,4 +1,4 @@
-import{o as t,c as e,j as o}from"./index-eec71458.js";const n=o(`<p>2021年1月8日10:51:43</p><h2>记一次web横屏转竖屏</h2><blockquote><p>css 修改</p></blockquote><pre><code>    // 横屏切换竖屏直接调换宽高笔
+import{o as t,c as e,j as o}from"./index-757c75b0.js";const n=o(`<p>2021年1月8日10:51:43</p><h2>记一次web横屏转竖屏</h2><blockquote><p>css 修改</p></blockquote><pre><code>    // 横屏切换竖屏直接调换宽高笔
     html.vertical {
         height: 100vw;
         width: 100vh;
