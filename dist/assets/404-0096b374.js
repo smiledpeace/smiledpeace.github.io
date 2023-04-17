@@ -1,1 +1,0 @@
-import{o as e,c as t}from"./index-757c75b0.js";const s={class:"page",flex:"main:center cross:center"},c={name:"404"},_=Object.assign(c,{props:{id:String},setup(n){return(o,r)=>(e(),t("div",s,"404-页面不存在"))}});export{_ as default};

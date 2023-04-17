@@ -1,1 +1,0 @@
-import{_ as t,C as s,a as n}from"./Footer-050be403.js";import{o as r,c as o,a,u as e,F as _}from"./index-757c75b0.js";const c={name:"Detail"},u=Object.assign(c,{props:{id:String},setup(i){return(m,l)=>(r(),o(_,null,[a(e(t)),a(e(s),{"is-detail":""}),a(e(n))],64))}});export{u as default};
