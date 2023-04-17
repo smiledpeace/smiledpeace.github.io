@@ -1,4 +1,4 @@
-import{o as e,c as s,j as p}from"./index-441c7803.js";const o=p(`<p>犯错让你更聪明————德国寓言</p><p> 当我们在构建web项目时， 必不可少的会使用webpack 强大而繁琐（望而生畏）。目前使用版本 <span class="special">2.x</span> 。 </p><blockquote><p> 望而生畏：一见之下就产生了畏惧心理。形容人神态威严或事务艰难令人畏惧。 </p></blockquote><p>工具很强大。在前端大潮流下屹立不倒，体现其价值可见一斑。</p><p> 最近在项目进行中，发现之前配置的 <span class="special">webpack.config.js</span> 没有将外部（ <span class="special">另外一个项目</span> ） 引入的js文件进行babel编译,导致在不支持es6的语法浏览器报错。（毋庸置疑，使用Chrome开发，是一个极其错误的决定。） </p><pre><code>{
+import{o as e,c as s,l as p}from"./index-91c1214f.js";const o=p(`<p>犯错让你更聪明————德国寓言</p><p> 当我们在构建web项目时， 必不可少的会使用webpack 强大而繁琐（望而生畏）。目前使用版本 <span class="special">2.x</span> 。 </p><blockquote><p> 望而生畏：一见之下就产生了畏惧心理。形容人神态威严或事务艰难令人畏惧。 </p></blockquote><p>工具很强大。在前端大潮流下屹立不倒，体现其价值可见一斑。</p><p> 最近在项目进行中，发现之前配置的 <span class="special">webpack.config.js</span> 没有将外部（ <span class="special">另外一个项目</span> ） 引入的js文件进行babel编译,导致在不支持es6的语法浏览器报错。（毋庸置疑，使用Chrome开发，是一个极其错误的决定。） </p><pre><code>{
     &quot;test&quot;: {},
     &quot;exclude&quot;: &quot;/node_modules/&quot;,
     &quot;use&quot;: [
